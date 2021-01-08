@@ -26,9 +26,13 @@ class Home extends Component {
     API.getBooks(this.state.q)
       .then(res =>
         this.setState({
-          books: res.data
+          books: res.data.items
         })
       )
+      .then(res => {
+        console.log(this.state.books)
+        console.log(this.state.books.length)
+      })
       .catch(() =>
         this.setState({
           books: [],
@@ -87,9 +91,9 @@ class Home extends Component {
                     <Book
                       key={book.id}
                       title={book.volumeInfo.title}
-                      subtitle={book.volumeInfo.subtitle}
+                      // subtitle={book.volumeInfo.subtitle}
                       link={book.volumeInfo.infoLink}
-                      authors={book.volumeInfo.authors.join(", ")}
+                      authors={book.volumeInfo.authors[0]}
                       description={book.volumeInfo.description}
                       image={book.volumeInfo.imageLinks.thumbnail}
                       Button={() => (
